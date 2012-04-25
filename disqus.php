@@ -13,7 +13,7 @@ class Plugin_Disqus extends Plugin{
 	
 	/*
 	 *	Usage:
-	 *		{{ disqus:show user="username" [dev="1"] [page_id:page:id] [page_url:slug]}}
+	 *		{{ disqus:show shortname="shortname" [dev="1"] [page_id:page:id] [page_url:slug]}}
 	 *
 	 *	dev="1" => Allow comments on localhost for test
 	 *	If dev is not set it will be set to 0 by default
@@ -24,7 +24,7 @@ class Plugin_Disqus extends Plugin{
 	 */
 	function show(){
 		
-		$user 	= $this->attribute('user');
+		$shortname 	= $this->attribute('shortname');
 		$dev	= $this->attribute('dev');
 		$id		= $this->attribute('page_id');
 		$link	= $this->attribute('page_url');
@@ -32,7 +32,7 @@ class Plugin_Disqus extends Plugin{
 		$str =("
 			<div id=\"disqus_thread\"></div>
 			<script type=\"text/javascript\">
-			    var disqus_shortname = '$user';  
+			    var disqus_shortname = '$shortname';  
 			");
 			
 			if($dev==1)
