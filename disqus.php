@@ -19,7 +19,7 @@ class Plugin_Disqus extends Plugin{
 	 *	If dev is not set it will be set to 0 by default
 	 *
 	 *	If page_id is set it will use the id of the page to associate the comments to the page,
-	 *	in this way you can canghe your url but i will not lose the comments.
+	 *	in this way you can canghe your url but you will not lose the comments.
 	 *
 	 */
 	function show(){
