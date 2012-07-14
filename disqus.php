@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * @author      Christian Giupponi STILOGO
+ * @author      Christian Giupponi STILOGO and Adam Fairholm
  * @link		http://www.stilogo.it
  * @package 	PyroCMS
  * @subpackage  Disqus
