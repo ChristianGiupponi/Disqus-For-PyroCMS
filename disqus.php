@@ -55,7 +55,7 @@ class Plugin_Disqus extends Plugin{
 		$str .= "\tvar disqus_shortname = '$shortname';\n";
 		
 		// Acceptable values for dev are 1 or on
-		if ($dev == 1 or $dev == 'on')
+		if ($dev == 1 or $dev == 'on' or (ENVIRONMENT == PYRO_DEVELOPMENT or ENVIRONMENT == PYRO_STAGING))
 		{
 			$str .= "\tvar disqus_developer = 1;\n";
 		}

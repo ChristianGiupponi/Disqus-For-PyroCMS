@@ -23,7 +23,7 @@ For further customization, here is a list of all available parameters:
 
 	<tr>
 		<td>dev</td>
-		<td>Set this to '1' or 'on' to turn on Disqus developer mode. You should do this on your staging or local environments.</td>
+		<td>Set this to '1' or 'on' to turn on Disqus developer mode. This is automatically set for your local and staging environment using the ENVIRONMENT constant.</td>
 	</tr>
 
 	<tr>
