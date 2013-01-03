@@ -2,7 +2,7 @@
 
 /**
  * @author      Christian Giupponi STILOGO and Adam Fairholm
- * @link		http://www.stilogo.it
+ * @link		http://www.stilogo.it | http://http://parse19.com
  * @package 	PyroCMS
  * @subpackage  Disqus
  * @category	Comments
@@ -10,6 +10,73 @@
  */
 
 class Plugin_Disqus extends Plugin{
+
+	public $version = '1.1.0';
+
+	public $name = array(
+		'it'	=> 'Disqus Plugin',
+		'en'	=> 'Disqus Plugin',
+	);
+
+	public $description = array(
+		'it'	=> 'Permette di aggiungere i commenti Disqus alle tue pagine.',
+		'en'	=> 'Allow you to add Disqus comments on your pages'		
+	);
+	
+	public function _self_doc()
+	{
+		$info = array(
+			'show' => array(
+				'description' => array(
+					'en' => 'Allow you to add Disqus comments on your pages'
+				),
+				'single' => true,
+				'double' => false,
+				'variables' => 'shortname|dev|id|url|title|category_id',
+				'attributes' => array(
+					'shortname' => array(
+						'type' => 'text',
+						'flags' => '',.
+						'default' => '',
+						'required' => true,
+					),
+					'dev' => array(
+						'type' => 'text',
+						'flags' => '1 or on',
+						'default' => 'PYRO_ENV',
+						'required' => false
+					),
+					'id' => array(
+						'type' => 'number',
+						'flags' => '',
+						'default' => 'Page ID',
+						'required' => false
+					),
+					'url' => array(
+						'type' => 'text',
+						'flags' => '',
+						'default' => 'Page URI',
+						'required' => false
+					),
+					'title' => array(
+						'type' => 'text',
+						'flags' => '',
+						'default' => '',
+						'required' => false
+					),
+					'category_id' => array(
+						'type' => 'number',
+						'flags' => '',
+						'default' => '',
+						'required' => false
+					),
+				),
+			),
+		);
+	
+		return $info;
+	}
+
 	
 	/**
 	 * Show Disqus Code
