@@ -36,7 +36,7 @@ class Plugin_Disqus extends Plugin{
 				'attributes' => array(
 					'shortname' => array(
 						'type' => 'text',
-						'flags' => '',.
+						'flags' => '',
 						'default' => '',
 						'required' => true,
 					),
