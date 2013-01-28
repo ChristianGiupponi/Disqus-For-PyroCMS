@@ -2,16 +2,22 @@
 
 /**
  * @author      Christian Giupponi STILOGO and Adam Fairholm
- * @link		http://www.stilogo.it | http://http://parse19.com
- * @package 	PyroCMS
+ * @link        http://www.stilogo.it | http://parse19.com
+ * @package     PyroCMS
  * @subpackage  Disqus
- * @category	Comments
+ * @category    Comments
  * @license     FREE
  */
 
 class Plugin_Disqus extends Plugin{
 
 	public $version = '1.1.0';
+
+	/**
+	 * Included Disqus script on Page already?
+	 * @var bool
+	 */
+	public static $included = false;
 
 	public $name = array(
 		'it'	=> 'Disqus Plugin',
@@ -20,7 +26,7 @@ class Plugin_Disqus extends Plugin{
 
 	public $description = array(
 		'it'	=> 'Permette di aggiungere i commenti Disqus alle tue pagine.',
-		'en'	=> 'Allow you to add Disqus comments on your pages'		
+		'en'	=> 'Allows you to add Disqus comments on your pages'		
 	);
 	
 	public function _self_doc()
@@ -28,11 +34,11 @@ class Plugin_Disqus extends Plugin{
 		$info = array(
 			'show' => array(
 				'description' => array(
-					'en' => 'Allow you to add Disqus comments on your pages'
+					'en' => 'Allows you to add Disqus comments on your pages'
 				),
 				'single' => true,
 				'double' => false,
-				'variables' => 'shortname|dev|id|url|title|category_id',
+				'variables' => 'shortname|dev|id|url|title|category_id|script_only',
 				'attributes' => array(
 					'shortname' => array(
 						'type' => 'text',
@@ -70,6 +76,12 @@ class Plugin_Disqus extends Plugin{
 						'default' => '',
 						'required' => false
 					),
+					'script_only' => array(
+						'type' => 'bool',
+						'flags' => '',
+						'default' => 'false',
+						'required' => false
+					),
 				),
 			),
 		);
@@ -86,14 +98,20 @@ class Plugin_Disqus extends Plugin{
 	 *
 	 *	See readme.md for documentation.
 	 */
-	public function show(){
+	public function show($script_only = false){
 		
-		$shortname 	= $this->attribute('shortname');
-		$dev		= $this->attribute('dev');
-		$id			= $this->attribute('id');
-		$link		= $this->attribute('url');
-		$title 		= $this->attribute('title');
-		$cat_id 	= $this->attribute('category_id');
+		// if we've already included the script, don't do it again
+		if ($this->included) {
+			return;
+		}
+
+		$shortname   = $this->attribute('shortname');
+		$dev         = $this->attribute('dev');
+		$id          = $this->attribute('id');
+		$link        = $this->attribute('url');
+		$title       = $this->attribute('title');
+		$cat_id      = $this->attribute('category_id');
+		$script_only = $this->attribute('script_only', $script_only);
 
 		// Get the current page.
 		$url_segments = $this->uri->segment_array();
@@ -106,6 +124,9 @@ class Plugin_Disqus extends Plugin{
 		{
 			$id = $page->id;
 		}
+		elseif ( ! $id ) {
+			$id = $this->uri->uri_string();
+		}
 
 		// Disqus "highly recommends" defining the 
 		// url variable, so let's do that.
@@ -114,9 +135,19 @@ class Plugin_Disqus extends Plugin{
 			$this->load->helper('url');
 			$link = site_url($page->uri);
 		}
-
-		$str =("<div id=\"disqus_thread\"></div>
-			<script type=\"text/javascript\">\n");
+		elseif ( ! $link ) {
+			$this->load->helper('url');
+			$link = site_url($this->uri->uri_string());
+		}
+		
+		// output string
+		$str = '';
+		
+		if ( ! $script_only) {
+			$str .="<div id=\"disqus_thread\"></div>\n";
+		}
+		
+		$str .= "<script type=\"text/javascript\">\n";
 
 		// We always have a shortname.
 		$str .= "\tvar disqus_shortname = '$shortname';\n";
@@ -152,11 +183,30 @@ class Plugin_Disqus extends Plugin{
 		dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	})();
-	</script>
-	<noscript>Please enable JavaScript to view the <a href=\"http://disqus.com/?ref_noscript\">comments powered by Disqus.</a></noscript>
-	<a href=\"http://disqus.com\" class=\"dsq-brlink\">blog comments powered by <span class=\"logo-disqus\">Disqus</span></a>
-		");
+	</script>");
+		
+		if ( ! $script_only) {
+			$str .= ("\n\t<noscript>Please enable JavaScript to view the <a href=\"http://disqus.com/?ref_noscript\">Comments powered by Disqus.</a></noscript>
+		<a href=\"http://disqus.com\" class=\"dsq-brlink\">Comments powered by <span class=\"logo-disqus\">Disqus</span></a>
+			");
+		}
+		
+		$this->included = true;
 		
 		return $str;
+	}
+
+	
+	/**
+	 * Include Disqus script without showing comments
+	 *
+	 *	Basic Usage:
+	 *		{{ disqus:script shortname="shortname" }}
+	 *
+	 *	See readme.md for documentation.
+	 */
+	public function script()
+	{
+		return $this->show(true);
 	}
 }
