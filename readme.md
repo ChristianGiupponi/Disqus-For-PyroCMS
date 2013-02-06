@@ -4,7 +4,7 @@ Simple plugin that allows you to add Disqus code anywhere on your site.
 
 ## Installation
 
-If you don't have a Disqus account, you can get one at [Disqus.com](http://www.disqus.com/) Drop the disqus.php file into your addons/default/plugins or addons/share\_addons/plugins folder.
+If you don't have a Disqus account, you can get one at [Disqus.com](http://www.disqus.com/) Drop the __disqus.php__ file into your _addons/default/plugins_ or _addons/share\_addons/plugins_ folder.
 
 ## Usage
 
@@ -28,7 +28,7 @@ For further customization, here is a list of all available parameters:
 
 	<tr>
 		<td>id</td>
-		<td>An ID for the comment thread. If this is not specified, this plugin will use the ID of the current page.</td>
+		<td>An ID for the comment thread. If this is not specified, this plugin will use the ID of the current page or current URI String.</td>
 	</tr>
 
 	<tr>
@@ -47,3 +47,9 @@ For further customization, here is a list of all available parameters:
 	</tr>
 
 </table>
+
+Additionally, if you need to put out the script on a page without rendering the comment box (like you would on pages that render the comment count on specific posts) you can use the following code:
+
+	{{ disqus:script shortname="shortname" }}
+
+As long as you use this plugin to output the script, it will check to make sure the script does not get output twice.
