@@ -11,7 +11,7 @@
 
 class Plugin_Disqus extends Plugin{
 
-	public $version = '1.1.0';
+	public $version = '1.2.0';
 
 	/**
 	 * Included Disqus script on Page already?
