@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * @author      Christian Giupponi STILOGO and Adam Fairholm
+ * @author      Christian Giupponi STILOGO, Adam Fairholm and Dan Sullivan
  * @link        http://www.stilogo.it | http://parse19.com
  * @package     PyroCMS
  * @subpackage  Disqus
@@ -112,6 +112,13 @@ class Plugin_Disqus extends Plugin{
 		$title       = $this->attribute('title');
 		$cat_id      = $this->attribute('category_id');
 		$script_only = $this->attribute('script_only', $script_only);
+
+		if (!$shortname){
+			$settings = $this->settings_m->get('disqus_short_name');
+			if ($settings->value){
+				$shortname = $settings->value;
+			} 
+		}
 
 		// Get the current page.
 		$url_segments = $this->uri->segment_array();
