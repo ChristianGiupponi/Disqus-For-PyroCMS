@@ -1,16 +1,16 @@
 # PyroCMS Disqus Plugin
 
-Simple plugin that allows you to add Disqus code anywhere on your site.
+Simple plugin that allows you to add Disqus code anywhere on your site and manage comments in the admin console.
 
 ## Installation
 
-If you don't have a Disqus account, you can get one at [Disqus.com](http://www.disqus.com/) Drop the __disqus.php__ file into your _addons/default/plugins_ or _addons/share\_addons/plugins_ folder.
+If you don't have a Disqus account, you can get one at [Disqus.com](http://www.disqus.com/) Create a folder called Disqus in your _addons/default/modules_ or _addons/share\_addons/modules_ folder then copy all files to this new folder.
 
 ## Usage
 
-To work, all you need to do is specify your Disqus shortname:
+To work, first enter your Disqus shortname on the setup page, hen include the following tag in your page or theme:
 
-	{{ disqus:show shortname="shortname" }}
+	{{ disqus:show }}
 
 For further customization, here is a list of all available parameters:
 
@@ -18,7 +18,7 @@ For further customization, here is a list of all available parameters:
 
 	<tr>
 		<td>shortname</td>
-		<td>Your official Disqus shortname. This is the only required parameter.</td>
+		<td>Your official Disqus shortname. This defaults to the value set in the admin console.</td>
 	</tr>
 
 	<tr>
@@ -50,6 +50,6 @@ For further customization, here is a list of all available parameters:
 
 Additionally, if you need to put out the script on a page without rendering the comment box (like you would on pages that render the comment count on specific posts) you can use the following code:
 
-	{{ disqus:script shortname="shortname" }}
+	{{ disqus:script }}
 
 As long as you use this plugin to output the script, it will check to make sure the script does not get output twice.
