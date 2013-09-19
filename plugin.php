@@ -101,7 +101,7 @@ class Plugin_Disqus extends Plugin{
 	public function show($script_only = false){
 		
 		// if we've already included the script, don't do it again
-		if ($this->included) {
+		if (static::$included) {
 			return;
 		}
 
@@ -198,7 +198,7 @@ class Plugin_Disqus extends Plugin{
 			");
 		}
 		
-		$this->included = true;
+		static::$included = true;
 		
 		return $str;
 	}
