@@ -22,11 +22,13 @@ class Plugin_Disqus extends Plugin{
 	public $name = array(
 		'it'	=> 'Disqus Plugin',
 		'en'	=> 'Disqus Plugin',
+		'es'	=> 'Disqus Plugin',
 	);
 
 	public $description = array(
 		'it'	=> 'Permette di aggiungere i commenti Disqus alle tue pagine.',
-		'en'	=> 'Allows you to add Disqus comments on your pages'		
+		'en'	=> 'Allows you to add Disqus comments on your pages.',
+		'es'	=> 'Permite agregar los comentarios Disqus en sus páginas.'	
 	);
 	
 	public function _self_doc()
@@ -34,7 +36,8 @@ class Plugin_Disqus extends Plugin{
 		$info = array(
 			'show' => array(
 				'description' => array(
-					'en' => 'Allows you to add Disqus comments on your pages'
+					'en' => 'Allows you to add Disqus comments on your pages.',
+					'es' => 'Permite agregar los comentarios Disqus en sus páginas.',
 				),
 				'single' => true,
 				'double' => false,
