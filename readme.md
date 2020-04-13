@@ -1,3 +1,5 @@
+# [DEPRECATED - DO NOT USE]
+
 # PyroCMS Disqus Plugin
 
 Simple plugin that allows you to add Disqus code anywhere on your site and manage comments in the admin console.
